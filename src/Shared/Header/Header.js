@@ -10,7 +10,6 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
-import { Image } from '@mui/icons-material';
 import logo from '../../images/logo.png';
 
 const settings = [ 'Profile', 'Account', 'Dashboard', 'Todo App' ];
@@ -39,7 +38,7 @@ const Header = () => {
         <AppBar position="static" sx={ { backgroundColor: "#3B4DA0" } }>
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={ { display: 'flex', justifyContent: 'space-between' } }>
-                    <Image src={ logo } alt="Keep Logo" />
+                    <img style={ { width: '40px', marginRight: '10px' } } src={ logo } alt="logo" />
                     <Typography
                         variant="h6"
                         noWrap
