@@ -34,7 +34,7 @@ const Header = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={ { backgroundColor: "#3B4DA0" } }>
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={ { display: 'flex', justifyContent: 'space-between' } }>
                     <Typography
