@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 const DisplaySingleNote = ( { note } ) => {
     return (
         <Grid item xs={ 12 } sm={ 12 } md={ 4 } lg={ 4 }>
-            <Card sx={ { minWidth: 275 } }>
+            <Card sx={ { minWidth: 350 } }>
                 <CardContent>
                     <Typography variant='h6' sx={ { color: '#3B4DA0', fontWeight: 'bold' } } gutterBottom>
                         { note?.noteTitle }
