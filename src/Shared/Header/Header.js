@@ -15,9 +15,12 @@ const settings = [ 'Profile', 'Account', 'Dashboard', 'Todo App' ];
 
 
 const Header = () => {
-    const [ setAnchorElNav ] = React.useState( null );
+    const [ anchorElNav, setAnchorElNav ] = React.useState( null );
     const [ anchorElUser, setAnchorElUser ] = React.useState( null );
 
+    const handleOpenNavMenu = ( event ) => {
+        setAnchorElNav( event.currentTarget );
+    };
     const handleOpenUserMenu = ( event ) => {
         setAnchorElUser( event.currentTarget );
     };
@@ -33,7 +36,7 @@ const Header = () => {
     return (
         <AppBar position="static">
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
+                <Toolbar disableGutters sx={ { display: 'flex', justifyContent: 'space-between' } }>
                     <Typography
                         variant="h6"
                         noWrap
@@ -55,7 +58,7 @@ const Header = () => {
                     <Box sx={ { flexGrow: 0 } }>
                         <Tooltip title="Open settings">
                             <IconButton onClick={ handleOpenUserMenu } sx={ { p: 0 } }>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                <Avatar alt="S" src="/static/images/avatar/2.jpg" />
                             </IconButton>
                         </Tooltip>
                         <Menu
