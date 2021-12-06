@@ -8,7 +8,7 @@ const DisplayNotes = () => {
     return (
         <Container>
             {
-                !allNotesFromLocalStorage && <Box variant='h3' sx={ { color: "red" } }>
+                !allNotesFromLocalStorage?.length && <Box variant='h3' sx={ { color: "red" } }>
                     <h3>No Note Found! Please add a new note!</h3>
                 </Box>
             }

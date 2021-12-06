@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -7,6 +7,24 @@ import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 
 const DisplaySingleNote = ( { note } ) => {
+    const [ notes, setNotes ] = useState( {} );
+    const [ success, setSuccess ] = useState( false );
+
+    const handleDeleteNote = ( noteTitle ) => {
+        console.log( noteTitle );
+        //get the alert message for note delete. if proceed is true then delete the note from the local storage
+        const proceed = window.confirm( "Are you sure to delete the note?" );
+
+        if ( proceed ) {
+            const notesFromLocalStorage = JSON.parse( localStorage.getItem( 'notes' ) );
+            const filteredNotes = notesFromLocalStorage?.filter( note => note.noteTitle !== noteTitle );
+            setNotes( filteredNotes );
+            localStorage.setItem( 'notes', JSON.stringify( filteredNotes ) );
+            setSuccess( true );
+            window.location.reload();
+        }
+    }
+
     return (
         <Grid item xs={ 12 } sm={ 12 } md={ 4 } lg={ 4 }>
             <Card sx={ { minWidth: 350 } }>
@@ -19,11 +37,10 @@ const DisplaySingleNote = ( { note } ) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Delete Note</Button>
+                    <Button onClick={ () => handleDeleteNote( note?.noteTitle ) } size="small">Delete Note</Button>
                 </CardActions>
             </Card>
         </Grid>
-
     );
 };
 
