@@ -16,7 +16,7 @@ const DisplayNotes = () => {
             <Grid container spacing={ 4 }>
                 {
                     allNotesFromLocalStorage?.map( note => <DisplaySingleNote
-                        key={ note.noteData }
+                        key={ note.noteId }
                         note={ note }>
                     </DisplaySingleNote> )
                 }

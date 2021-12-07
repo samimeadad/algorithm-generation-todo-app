@@ -2,7 +2,7 @@ import { Button, Container, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 const InputForm = () => {
-    const [ noteData, setNoteData ] = useState( '' );
+    const [ noteData, setNoteData ] = useState( {} );
     const [ success, setSuccess ] = useState( false );
 
     const handleInputChange = e => {
@@ -22,11 +22,25 @@ const InputForm = () => {
     }
 
     const handleNoteFormSubmit = e => {
-        if ( !noteData ) {
+        const notes = JSON.parse( localStorage.getItem( 'notes' ) ) || [];
+
+        if ( notes?.length > 0 ) {
+            notes?.forEach( note => {
+                if ( parseInt( note?.noteId ) === parseInt( noteData.noteId ) ) {
+                    console.log( note?.noteId );
+                    console.log( noteData.noteId );
+                    alert( 'Note Id already exists' );``
+                    return;
+                }
+            } );
+        }
+
+        else if ( !noteData ) {
             setSuccess( false );
             e.preventDefault();
             return;
         }
+
         else {
             saveNoteToLocalStorage();
             setSuccess( true );
@@ -38,6 +52,14 @@ const InputForm = () => {
     return (
         <Container sx={ { my: 10 } }>
             <form onSubmit={ handleNoteFormSubmit }>
+                <TextField
+                    sx={ { width: .75, mb: 4 } }
+                    id="noteId"
+                    label="Note ID (Please enter a unique numeric value)"
+                    name="noteId"
+                    onBlur={ handleInputChange }
+                    variant="standard"
+                />
                 <TextField
                     sx={ { width: .75, mb: 4 } }
                     id="noteTitle"
@@ -58,11 +80,8 @@ const InputForm = () => {
                 <Button
                     sx={ { width: .25, m: 6, backgroundColor: "#3B4DA0" } }
                     variant="contained"
-                    color="primary"
                     type="submit"
-                >
-                    Save
-                </Button>
+                >Save</Button>
             </form>
         </Container>
     );

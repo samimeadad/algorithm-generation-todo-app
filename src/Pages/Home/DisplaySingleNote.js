@@ -10,14 +10,13 @@ const DisplaySingleNote = ( { note } ) => {
     const [ notes, setNotes ] = useState( {} );
     const [ success, setSuccess ] = useState( false );
 
-    const handleDeleteNote = ( noteTitle ) => {
-        console.log( noteTitle );
+    const handleDeleteNote = ( id ) => {
         //get the alert message for note delete. if proceed is true then delete the note from the local storage
         const proceed = window.confirm( "Are you sure to delete the note?" );
 
         if ( proceed ) {
             const notesFromLocalStorage = JSON.parse( localStorage.getItem( 'notes' ) );
-            const filteredNotes = notesFromLocalStorage?.filter( note => note.noteTitle !== noteTitle );
+            const filteredNotes = notesFromLocalStorage?.filter( note => note.noteId !== id );
             setNotes( filteredNotes );
             localStorage.setItem( 'notes', JSON.stringify( filteredNotes ) );
             setSuccess( true );
@@ -37,7 +36,7 @@ const DisplaySingleNote = ( { note } ) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button onClick={ () => handleDeleteNote( note?.noteTitle ) } size="small">Delete Note</Button>
+                    <Button onClick={ () => handleDeleteNote( note?.noteId ) } size="small">Delete Note</Button>
                 </CardActions>
             </Card>
         </Grid>

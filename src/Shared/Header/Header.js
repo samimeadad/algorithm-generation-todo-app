@@ -45,7 +45,7 @@ const Header = () => {
                         component="div"
                         sx={ { mr: 2, display: { xs: 'none', md: 'flex' } } }
                     >
-                        <Link to="/" style={ { textDecoration: 'none', color: 'white', fontWeight: 'bold' } }>Sami's Todo App</Link>
+                        <Link to="/" style={ { textDecoration: 'none', color: 'white', fontWeight: 'bold' } }>Algorithm Generation Todo App</Link>
                     </Typography>
 
                     <Typography
@@ -54,7 +54,7 @@ const Header = () => {
                         component="div"
                         sx={ { flexGrow: 1, display: { xs: 'flex', md: 'none' } } }
                     >
-                        <Link to="/" style={ { textDecoration: 'none', color: 'white', fontWeight: 'bold' } }>Sami's Todo App</Link>
+                        <Link to="/" style={ { textDecoration: 'none', color: 'white', fontWeight: 'bold' } }>Algorithm Generation Todo App</Link>
                     </Typography>
 
                     <Box sx={ { flexGrow: 0 } }>
