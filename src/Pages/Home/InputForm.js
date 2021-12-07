@@ -22,20 +22,22 @@ const InputForm = () => {
     }
 
     const handleNoteFormSubmit = e => {
-        const notes = JSON.parse( localStorage.getItem( 'notes' ) ) || [];
+        e.preventDefault();
 
-        if ( notes?.length > 0 ) {
-            notes?.forEach( note => {
-                if ( parseInt( note?.noteId ) === parseInt( noteData.noteId ) ) {
-                    console.log( note?.noteId );
-                    console.log( noteData.noteId );
-                    alert( 'Note Id already exists' );
-                    return;
-                }
-            } );
+        const notes = JSON.parse( localStorage.getItem( 'notes' ) );
+
+        const duplicateNote = notes?.filter( note => parseInt( note.noteId ) === parseInt( noteData.noteId ) );
+
+        console.log( duplicateNote );
+
+        if ( !noteData ) {
+            setSuccess( false );
+            e.preventDefault();
+            return;
         }
 
-        else if ( !noteData ) {
+        else if ( duplicateNote?.length > 0 ) {
+            alert( "Note already exists" );
             setSuccess( false );
             e.preventDefault();
             return;
@@ -46,7 +48,6 @@ const InputForm = () => {
             setSuccess( true );
             window.location.reload();
         }
-        e.preventDefault();
     }
 
     return (
