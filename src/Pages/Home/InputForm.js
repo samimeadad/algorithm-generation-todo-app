@@ -29,7 +29,7 @@ const InputForm = () => {
                 if ( parseInt( note?.noteId ) === parseInt( noteData.noteId ) ) {
                     console.log( note?.noteId );
                     console.log( noteData.noteId );
-                    alert( 'Note Id already exists' );``
+                    alert( 'Note Id already exists' );
                     return;
                 }
             } );
