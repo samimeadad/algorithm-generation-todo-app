@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const DisplaySingleNote = ( { note } ) => {
     const [ notes, setNotes ] = useState( {} );
@@ -38,8 +39,9 @@ const DisplaySingleNote = ( { note } ) => {
                         Tag: { note?.noteTag }
                     </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions sx={ { display: 'flex', justifyContent: 'space-between' } }>
                     <Button onClick={ () => handleDeleteNote( note?.noteId ) } size="small">Delete Note</Button>
+                    <Link style={ { textDecoration: 'none' } } to={ `/notes/update/${ note?.noteId }` }><Button size="small">Edit Note</Button></Link>
                 </CardActions>
             </Card>
         </Grid>

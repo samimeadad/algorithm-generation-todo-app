@@ -8,7 +8,7 @@ const DisplaySingleTag = ( { tag } ) => {
     return (
         <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 }>
             <FormGroup>
-                <FormControlLabel control={ <Checkbox defaultUnchecked /> } label={ tag.tagName } />
+                <FormControlLabel control={ <Checkbox /> } label={ tag.tagName } />
             </FormGroup>
         </Grid>
     );

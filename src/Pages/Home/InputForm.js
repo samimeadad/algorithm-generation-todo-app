@@ -154,11 +154,10 @@ const InputForm = () => {
                                 id="noteTagId"
                                 name="noteTag"
                                 value={ noteData.noteTag }
-                                label="Select a Tag"
                                 onChange={ handleNoteInputChange }
                             >
                                 {
-                                    allTagsFromLocalStorage?.map( tag => <MenuItem value={ tag.tagName }>{ tag.tagName }</MenuItem> )
+                                    allTagsFromLocalStorage?.map( tag => <MenuItem key={ tag?.tagId } value={ tag?.tagName }>{ tag.tagName }</MenuItem> )
                                 }
                             </Select>
                         </FormControl>

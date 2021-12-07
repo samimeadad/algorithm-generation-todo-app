@@ -38,7 +38,9 @@ const Header = () => {
         <AppBar position="static" sx={ { backgroundColor: "#3B4DA0" } }>
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={ { display: 'flex', justifyContent: 'space-between' } }>
-                    <img style={ { width: '40px', marginRight: '10px' } } src={ logo } alt="logo" />
+                    <Link to="/">
+                        <img style={ { width: '40px', marginRight: '10px' } } src={ logo } alt="logo" />
+                    </Link>
                     <Typography
                         variant="h6"
                         noWrap
