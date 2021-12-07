@@ -26,7 +26,7 @@ const DisplaySingleNote = ( { note } ) => {
 
     return (
         <Grid item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
-            <Card sx={ { minWidth: 250 } }>
+            <Card sx={ { minWidth: 350 } }>
                 <CardContent>
                     <Typography variant='h5' sx={ { color: '#3B4DA0', fontWeight: 'bold' } } gutterBottom>
                         { note?.noteTitle }
