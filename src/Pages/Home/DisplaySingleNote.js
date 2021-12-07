@@ -25,14 +25,17 @@ const DisplaySingleNote = ( { note } ) => {
     }
 
     return (
-        <Grid item xs={ 12 } sm={ 12 } md={ 4 } lg={ 4 }>
-            <Card sx={ { minWidth: 350 } }>
+        <Grid item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
+            <Card sx={ { minWidth: 250 } }>
                 <CardContent>
-                    <Typography variant='h6' sx={ { color: '#3B4DA0', fontWeight: 'bold' } } gutterBottom>
+                    <Typography variant='h5' sx={ { color: '#3B4DA0', fontWeight: 'bold' } } gutterBottom>
                         { note?.noteTitle }
                     </Typography>
                     <Typography variant="body">
                         { note?.noteData }
+                    </Typography>
+                    <Typography variant="h6" sx={ { color: '#3B4DA0', fontWeight: 'bold', mt: 1 } }>
+                        Tag: { note?.noteTag }
                     </Typography>
                 </CardContent>
                 <CardActions>

@@ -20,7 +20,6 @@ const DisplayNotes = () => {
                         note={ note }>
                     </DisplaySingleNote> )
                 }
-
             </Grid>
         </Container>
     );
