@@ -17,7 +17,7 @@ const DisplayTags = () => {
             <Grid container spacing={ 4 }>
                 {
                     tags?.map( tag => <DisplaySingleTag
-                        key={ tag.tagId }
+                        key={ tag._id }
                         tag={ tag }>
                     </DisplaySingleTag> )
                 }

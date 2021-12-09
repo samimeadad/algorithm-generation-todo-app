@@ -17,7 +17,7 @@ const DisplayNotes = () => {
             <Grid container spacing={ 4 }>
                 {
                     notes?.map( note => <DisplaySingleNote
-                        key={ note.noteId }
+                        key={ note._id }
                         note={ note }>
                     </DisplaySingleNote> )
                 }

@@ -1,12 +1,13 @@
 import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import useTags from '../../Hooks/useTags';
 
 const InputForm = () => {
     const [ noteData, setNoteData ] = useState( {} );
     const [ tagData, setTagData ] = useState( {} );
     const [ success, setSuccess ] = useState( false );
 
-    const allTagsFromLocalStorage = JSON.parse( localStorage.getItem( 'tags' ) );
+    const [ tags ] = useTags();
 
     const handleTagInputChange = e => {
         e.preventDefault();
@@ -26,40 +27,48 @@ const InputForm = () => {
         setNoteData( newNoteData );
     }
 
-    const saveTagToLocalStorage = () => {
-        const tags = JSON.parse( localStorage.getItem( 'tags' ) ) || [];
-        tags.push( tagData );
-        localStorage.setItem( 'tags', JSON.stringify( tags ) );
-        setSuccess( true );
+    const saveTagToMongoDb = () => {
+        fetch( 'http://localhost:5001/tags', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify( tagData )
+        } )
+            .then( res => res.json() )
+            .then( data => {
+                if ( data.insertedId ) {
+                    alert( 'New tag is added successfully. Thank you.' );
+                }
+            } )
     }
 
-    const saveNoteToLocalStorage = () => {
-        const notes = JSON.parse( localStorage.getItem( 'notes' ) ) || [];
-        notes.push( noteData );
-        localStorage.setItem( 'notes', JSON.stringify( notes ) );
-        setSuccess( true );
+    const saveNoteToMongoDb = () => {
+        fetch( 'http://localhost:5001/notes', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify( noteData )
+        } )
+            .then( res => res.json() )
+            .then( data => {
+                if ( data.insertedId ) {
+                    alert( 'New note is added successfully. Thank you.' );
+                }
+            } )
     }
 
     const handleTagFormSubmit = e => {
         e.preventDefault();
 
-        const tags = JSON.parse( localStorage.getItem( 'tags' ) );
-
-        const duplicateTags = tags?.filter( tag => parseInt( tag.tagId ) === parseInt( tagData.tagId ) );
-
-        if ( !tagData.tagId || !tagData.tagName ) {
-            setSuccess( false );
-            return;
-        }
-
-        else if ( duplicateTags?.length > 0 ) {
-            alert( "Duplicate Tag ID! Please enter a unique Tag ID!" );
+        if ( !tagData.tagName ) {
             setSuccess( false );
             return;
         }
 
         else {
-            saveTagToLocalStorage();
+            saveTagToMongoDb();
             setSuccess( true );
             window.location.reload();
         }
@@ -68,23 +77,14 @@ const InputForm = () => {
     const handleNoteFormSubmit = e => {
         e.preventDefault();
 
-        const notes = JSON.parse( localStorage.getItem( 'notes' ) );
-
-        const duplicateNote = notes?.filter( note => parseInt( note.noteId ) === parseInt( noteData.noteId ) );
-
-        if ( !noteData.noteId || !noteData.noteTitle || !noteData.noteData ) {
+        if ( !noteData.noteTitle || !noteData.noteData || !noteData.noteTag ) {
             setSuccess( false );
-            return;
-        }
-
-        else if ( duplicateNote?.length > 0 ) {
-            alert( "Duplicate Note ID! Please enter a unique Note ID!" );
-            setSuccess( false );
+            alert( "Please enter the data correctly!" );
             return;
         }
 
         else {
-            saveNoteToLocalStorage();
+            saveNoteToMongoDb();
             setSuccess( true );
             window.location.reload();
         }
@@ -96,14 +96,6 @@ const InputForm = () => {
                 <Grid sx={ { border: 1, p: 4 } } item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
                     <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left" } }>Please Add a Tag Below</Typography>
                     <form onSubmit={ handleTagFormSubmit }>
-                        <TextField
-                            sx={ { width: 1, mb: 4 } }
-                            id="tagId"
-                            label="Tag ID (Please enter a unique numeric value)"
-                            name="tagId"
-                            onBlur={ handleTagInputChange }
-                            variant="standard"
-                        />
                         <TextField
                             sx={ { width: 1, mb: 4 } }
                             id="tagName"
@@ -123,14 +115,6 @@ const InputForm = () => {
                 <Grid sx={ { border: 1, p: 4 } } item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
                     <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left" } }>Please Add a Note Below</Typography>
                     <form onSubmit={ handleNoteFormSubmit }>
-                        <TextField
-                            sx={ { width: 1, mb: 4 } }
-                            id="noteId"
-                            label="Note ID (Please enter a unique numeric value)"
-                            name="noteId"
-                            onBlur={ handleNoteInputChange }
-                            variant="standard"
-                        />
                         <TextField
                             sx={ { width: 1, mb: 4 } }
                             id="noteTitle"
@@ -157,7 +141,7 @@ const InputForm = () => {
                                 onChange={ handleNoteInputChange }
                             >
                                 {
-                                    allTagsFromLocalStorage?.map( tag => <MenuItem key={ tag?.tagId } value={ tag?.tagName }>{ tag.tagName }</MenuItem> )
+                                    tags?.map( tag => <MenuItem key={ tag?._id } defaultValue={ tag?.tagName } value={ tag?.tagName }>{ tag.tagName }</MenuItem> )
                                 }
                             </Select>
                         </FormControl>

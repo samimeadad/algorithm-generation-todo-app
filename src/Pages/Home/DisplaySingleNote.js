@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -9,20 +9,25 @@ import { Link } from 'react-router-dom';
 import useNotes from '../../Hooks/useNotes';
 
 const DisplaySingleNote = ( { note } ) => {
-    const [ notes, setNotes ] = useNotes( {} );
-    const [ success, setSuccess ] = useState( false );
+    const [ notes, setNotes ] = useNotes();
 
     const handleDeleteNote = ( id ) => {
         //get the alert message for note delete. if proceed is true then delete the note from the local storage
         const proceed = window.confirm( "Are you sure to delete the note?" );
-
         if ( proceed ) {
-            const notesFromLocalStorage = JSON.parse( localStorage.getItem( 'notes' ) );
-            const filteredNotes = notesFromLocalStorage?.filter( note => note.noteId !== id );
-            setNotes( filteredNotes );
-            localStorage.setItem( 'notes', JSON.stringify( filteredNotes ) );
-            setSuccess( true );
-            window.location.reload();
+            const url = `http://localhost:5001/notes/${ id }`;
+            fetch( url, {
+                method: 'DELETE'
+            } )
+                .then( res => res.json() )
+                .then( data => {
+                    if ( data.deletedCount > 0 ) {
+                        const remainingNotes = notes.filter( note => parseInt( note._id ) !== parseInt( id ) );
+                        setNotes( remainingNotes );
+                        alert( 'Your note has been deleted successfully' );
+                        window.location.reload( false );
+                    }
+                } )
         }
     }
 
@@ -41,8 +46,8 @@ const DisplaySingleNote = ( { note } ) => {
                     </Typography>
                 </CardContent>
                 <CardActions sx={ { display: 'flex', justifyContent: 'space-between' } }>
-                    <Button onClick={ () => handleDeleteNote( note?.noteId ) } size="small">Delete Note</Button>
-                    <Link style={ { textDecoration: 'none' } } to={ `/notes/update/${ note?.noteId }` }><Button size="small">Edit Note</Button></Link>
+                    <Button onClick={ () => handleDeleteNote( note?._id ) } size="small">Delete Note</Button>
+                    <Link style={ { textDecoration: 'none' } } to={ `/notes/update/${ note?._id }` }><Button size="small">Edit Note</Button></Link>
                 </CardActions>
             </Card>
         </Grid>
