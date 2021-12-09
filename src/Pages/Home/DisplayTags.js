@@ -1,21 +1,22 @@
 import { Box, Container, Grid, Typography } from '@mui/material';
 import React from 'react';
+import useTags from '../../Hooks/useTags';
 import DisplaySingleTag from './DisplaySingleTag';
 
 const DisplayTags = () => {
-    const allTagsFromLocalStorage = JSON.parse( localStorage.getItem( 'tags' ) );
+    const [ tags ] = useTags();
 
     return (
         <Container>
             {
-                !allTagsFromLocalStorage?.length && <Box variant='h3' sx={ { color: "red" } }>
+                !tags?.length && <Box variant='h3' sx={ { color: "red" } }>
                     <h3>No Tag Found! Please add a new tag!</h3>
                 </Box>
             }
-            <Typography variant="h4" sx={ { textAlign: 'center', my: 8, fontWeight: 'bold', color: '#3B4DA0' } }>Total Tags: { allTagsFromLocalStorage?.length }</Typography>
+            <Typography variant="h4" sx={ { textAlign: 'center', my: 8, fontWeight: 'bold', color: '#3B4DA0' } }>Total Tags: { tags?.length }</Typography>
             <Grid container spacing={ 4 }>
                 {
-                    allTagsFromLocalStorage?.map( tag => <DisplaySingleTag
+                    tags?.map( tag => <DisplaySingleTag
                         key={ tag.tagId }
                         tag={ tag }>
                     </DisplaySingleTag> )

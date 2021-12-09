@@ -1,0 +1,18 @@
+[
+    {
+        "tagId": "1",
+        "tagName": "Office"
+    },
+    {
+        "tagId": "2",
+        "tagName": "Personal"
+    },
+    {
+        "tagId": "3",
+        "tagName": "Family"
+    },
+    {
+        "tagId": "4",
+        "tagName": "Programming"
+    }
+]

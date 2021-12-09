@@ -14,7 +14,6 @@ import logo from '../../images/logo.png';
 
 const settings = [ 'Profile', 'Account', 'Dashboard', 'Todo App' ];
 
-
 const Header = () => {
     const [ anchorElNav, setAnchorElNav ] = React.useState( null );
     const [ anchorElUser, setAnchorElUser ] = React.useState( null );
@@ -49,7 +48,6 @@ const Header = () => {
                     >
                         <Link to="/" style={ { textDecoration: 'none', color: 'white', fontWeight: 'bold' } }>Algorithm Generation Todo App</Link>
                     </Typography>
-
                     <Typography
                         variant="h6"
                         noWrap

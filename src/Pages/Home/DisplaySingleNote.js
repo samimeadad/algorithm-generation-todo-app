@@ -6,9 +6,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
+import useNotes from '../../Hooks/useNotes';
 
 const DisplaySingleNote = ( { note } ) => {
-    const [ notes, setNotes ] = useState( {} );
+    const [ notes, setNotes ] = useNotes( {} );
     const [ success, setSuccess ] = useState( false );
 
     const handleDeleteNote = ( id ) => {
