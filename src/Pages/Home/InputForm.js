@@ -39,12 +39,13 @@ const InputForm = () => {
             .then( data => {
                 if ( data.insertedId ) {
                     alert( 'New tag is added successfully. Thank you.' );
+                    window.location.reload()
                 }
             } )
     }
 
     const saveNoteToMongoDb = () => {
-        fetch( 'https://enigmatic-coast-44636.herokuapp.com/notes', {
+        fetch( 'https://enigmatic-coast-44636.herokuapp.com//notes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -55,6 +56,7 @@ const InputForm = () => {
             .then( data => {
                 if ( data.insertedId ) {
                     alert( 'New note is added successfully. Thank you.' );
+                    window.location.reload();
                 }
             } )
     }
