@@ -5,7 +5,7 @@ const useNotes = () => {
     const [ notes, setNotes ] = useState( [] );
 
     useEffect( () => {
-        fetch( 'https://enigmatic-coast-44636.herokuapp.com/notes' )
+        fetch( 'http://localhost:5001/notes' )
             .then( res => res.json() )
             .then( data => setNotes( data ) );
     }, [] );

@@ -15,7 +15,7 @@ const DisplaySingleNote = ( { note } ) => {
         //get the alert message for note delete. if proceed is true then delete the note from the local storage
         const proceed = window.confirm( "Are you sure to delete the note?" );
         if ( proceed ) {
-            const url = `https://enigmatic-coast-44636.herokuapp.com/notes/${ id }`;
+            const url = `http://localhost:5001/notes/${ id }`;
             fetch( url, {
                 method: 'DELETE'
             } )
