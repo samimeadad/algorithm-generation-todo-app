@@ -94,7 +94,7 @@ const InputForm = () => {
         <Container sx={ { my: 10 } }>
             <Grid container spacing={ 2 }>
                 <Grid sx={ { border: 1, p: 4 } } item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
-                    <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left" } }>Please Add a Tag Below</Typography>
+                    <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left", mb: 4 } }>Please Add a Tag Below</Typography>
                     <form onSubmit={ handleTagFormSubmit }>
                         <TextField
                             sx={ { width: 1, mb: 4 } }
@@ -113,7 +113,7 @@ const InputForm = () => {
                     </form>
                 </Grid>
                 <Grid sx={ { border: 1, p: 4 } } item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
-                    <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left" } }>Please Add a Note Below</Typography>
+                    <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left", mb: 4 } }>Please Add a Note Below</Typography>
                     <form onSubmit={ handleNoteFormSubmit }>
                         <TextField
                             sx={ { width: 1, mb: 4 } }
