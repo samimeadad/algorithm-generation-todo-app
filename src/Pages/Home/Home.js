@@ -5,6 +5,7 @@ import DisplayNotes from './DisplayNotes';
 import DisplayTags from './DisplayTags';
 import InputForm from './InputForm';
 
+//component for Home page
 const Home = () => {
     return (
         <Container sx={ { my: 10 } }>

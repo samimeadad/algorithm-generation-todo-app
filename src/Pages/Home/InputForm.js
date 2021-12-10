@@ -2,13 +2,21 @@ import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, Tex
 import React, { useState } from 'react';
 import useTags from '../../Hooks/useTags';
 
+//component for input from for adding new note and new tag
 const InputForm = () => {
+    //state variable for store the input data for note
     const [ noteData, setNoteData ] = useState( {} );
+
+    //state variable for store the input data for tag
     const [ tagData, setTagData ] = useState( {} );
+
+    //state variable for store the success status of input data
     const [ success, setSuccess ] = useState( false );
 
+    //import the tags from the useTags hook to display the tags in the dropdown (select) menu on the input form
     const [ tags ] = useTags();
 
+    //function for handle the input data for tag
     const handleTagInputChange = e => {
         e.preventDefault();
         const field = e.target.name;
@@ -18,6 +26,7 @@ const InputForm = () => {
         setTagData( newTagData );
     }
 
+    //function for handle the input data for note
     const handleNoteInputChange = e => {
         e.preventDefault();
         const field = e.target.name;
@@ -27,6 +36,7 @@ const InputForm = () => {
         setNoteData( newNoteData );
     }
 
+    //function for handle the submit data for tag, send the data to the backend server, and save the data in the mongodb database connected to the backend server
     const handleSaveTag = e => {
         e.preventDefault();
         if ( !tagData.tagName ) {
@@ -52,6 +62,7 @@ const InputForm = () => {
         }
     }
 
+    //function for handle the submit data for note, send the data to the backend server, and save the data in the mongodb database connected to the backend server
     const handleSaveNote = e => {
         e.preventDefault();
         if ( !noteData.noteTitle || !noteData.noteData || !noteData.noteTag ) {
@@ -77,6 +88,7 @@ const InputForm = () => {
         }
     }
 
+    //render the Input form for notes and tags
     return (
         <Container sx={ { my: 10 } }>
             <Grid container spacing={ 2 }>

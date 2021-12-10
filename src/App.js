@@ -5,6 +5,7 @@ import Header from './Shared/Header/Header';
 import PageNotFound from './Shared/PageNotFound/PageNotFound';
 import UpdateNote from './Pages/UpdateNote/UpdateNote';
 
+//the web app starts from here through index.js. All components are rendered here in App.js. We can say App.js as mother of all components, and routes.
 function App () {
   return (
     <div className="App">

@@ -8,6 +8,7 @@ import { Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useNotes from '../../Hooks/useNotes';
 
+//Declare the component to display a single note in the home page
 const DisplaySingleNote = ( { note } ) => {
     const [ notes, setNotes ] = useNotes();
 

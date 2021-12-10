@@ -4,20 +4,28 @@ import { useParams } from "react-router-dom";
 import useNotes from '../../Hooks/useNotes';
 import useTags from '../../Hooks/useTags';
 
-const UpdateNote = () => {
-    const { noteId } = useParams();
-    console.log( noteId );
 
+//component for update note data
+const UpdateNote = () => {
+    //get note id from url
+    const { noteId } = useParams();
+
+    //get note data from useNotes hook
     const [ notes ] = useNotes();
+
+    //get tags data from useTags hook
     const [ tags ] = useTags();
 
+    //set state for note data input from the user
     const [ noteData, setNoteData ] = useState( {} );
+
+    //set state for success status of update note
     const [ success, setSuccess ] = useState( false );
 
+    //find the required note to be updated by matching url id parameter and note id
     const notesToBeUpdated = notes?.find( note => note?._id === noteId );
 
-    console.log( notesToBeUpdated );
-
+    //store the user input data to the state variable noteData
     const handleNoteInputChange = e => {
         e.preventDefault();
         const field = e.target.name;
@@ -27,8 +35,7 @@ const UpdateNote = () => {
         setNoteData( newNoteData );
     }
 
-    console.log( noteData );
-
+    //function to update the note data that is being edited by sending the data to the backend and update the data on the mongodb database
     const handleNoteUpdateFormSubmit = e => {
         e.preventDefault();
         const url = `https://enigmatic-coast-44636.herokuapp.com/notes/${ noteId }`;

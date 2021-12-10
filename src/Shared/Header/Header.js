@@ -14,6 +14,7 @@ import logo from '../../images/logo.png';
 
 const settings = [ 'Profile', 'Account', 'Dashboard', 'Todo App' ];
 
+//component for NavBar/Header section. It is just pure Material UI Code.
 const Header = () => {
     const [ anchorElNav, setAnchorElNav ] = React.useState( null );
     const [ anchorElUser, setAnchorElUser ] = React.useState( null );

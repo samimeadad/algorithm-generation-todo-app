@@ -3,9 +3,12 @@ import * as React from 'react';
 import DisplaySingleNote from './DisplaySingleNote';
 import useNotes from '../../Hooks/useNotes';
 
+//Declare the component to display all notes on the UI
 const DisplayNotes = () => {
+    //Call the state variable from the hook by which we can get all the note data
     const [ notes ] = useNotes();
 
+    //Render the component as required
     return (
         <Container>
             {

@@ -6,16 +6,20 @@ import Checkbox from '@mui/material/Checkbox';
 import useTags from '../../Hooks/useTags';
 import useNotes from '../../Hooks/useNotes';
 
+//Declare the component to display a single tag in the home page
 const DisplaySingleTag = ( { tag } ) => {
     const [ tags, setTags ] = useTags();
     const [ notes ] = useNotes();
 
     const handleDeleteTag = ( id ) => {
 
+        //find the required tag to be deleted from the tags array by Array.find() method
         const tagToBeDeleted = tags.find( tag => tag?._id === id );
 
+        //check the tagToBeDeleted is used in any note or not
         const notesToBeUpdated = notes?.filter( note => note?.noteTag?.includes( tagToBeDeleted.tagName ) );
 
+        //if the tag is used in any note then show the alert message that you cannot delete the tag. it is already used my some notes
         if ( notesToBeUpdated.length > 0 ) {
             alert( 'This tag is being used by notes. Please remove it from those notes before deleting it.' );
             return;
@@ -40,6 +44,7 @@ const DisplaySingleTag = ( { tag } ) => {
         }
     }
 
+    //render the UI as required
     return (
         <Grid item xs={ 12 } sm={ 12 } md={ 12 } lg={ 12 }>
             <FormGroup>

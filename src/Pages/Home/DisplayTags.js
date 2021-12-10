@@ -3,9 +3,12 @@ import React from 'react';
 import useTags from '../../Hooks/useTags';
 import DisplaySingleTag from './DisplaySingleTag';
 
+//Declare the component to display all tags on the UI
 const DisplayTags = () => {
+    //Call the state variable from the hook by which we can get all the note data
     const [ tags ] = useTags();
 
+    //Render the component as required
     return (
         <Container>
             {
