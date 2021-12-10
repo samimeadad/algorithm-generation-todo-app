@@ -31,7 +31,7 @@ const UpdateNote = () => {
 
     const handleNoteUpdateFormSubmit = e => {
         e.preventDefault();
-        const url = `http://localhost:5001/notes/${ noteId }`;
+        const url = `https://enigmatic-coast-44636.herokuapp.com/notes/${ noteId }`;
         fetch( url, {
             method: 'PUT',
             headers: {

@@ -24,7 +24,7 @@ const DisplaySingleTag = ( { tag } ) => {
         //get the alert message for tag delete. if proceed is true then delete the tag from the local storage
         const proceed = window.confirm( "Are you sure to delete the tag?" );
         if ( proceed ) {
-            const url = `http://localhost:5001/tags/${ id }`;
+            const url = `https://enigmatic-coast-44636.herokuapp.com/tags/${ id }`;
             fetch( url, {
                 method: 'DELETE'
             } )
