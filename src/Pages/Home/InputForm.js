@@ -27,68 +27,53 @@ const InputForm = () => {
         setNoteData( newNoteData );
     }
 
-    const saveTagToMongoDb = () => {
-        fetch( 'https://enigmatic-coast-44636.herokuapp.com/tags', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify( tagData )
-        } )
-            .then( res => res.json() )
-            .then( data => {
-                if ( data.insertedId ) {
-                    alert( 'New tag is added successfully. Thank you.' );
-                    window.location.reload()
-                }
-            } )
-    }
-
-    const saveNoteToMongoDb = () => {
-        fetch( 'http://localhost:5001/notes', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify( noteData )
-        } )
-            .then( res => res.json() )
-            .then( data => {
-                if ( data.insertedId ) {
-                    alert( 'New note is added successfully. Thank you.' );
-                    window.location.reload();
-                }
-            } )
-    }
-
-    const handleTagFormSubmit = e => {
+    const handleSaveTag = e => {
         e.preventDefault();
-
         if ( !tagData.tagName ) {
+            alert( "No empty filed! Please enter the data correctly!" );
             setSuccess( false );
             return;
         }
-
         else {
-            saveTagToMongoDb();
-            setSuccess( true );
-            window.location.reload();
+            fetch( 'https://enigmatic-coast-44636.herokuapp.com/tags', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify( tagData )
+            } )
+                .then( res => res.json() )
+                .then( data => {
+                    if ( data.insertedId ) {
+                        alert( 'New tag is added successfully. Thank you.' );
+                        window.location.reload();
+                    }
+                } )
         }
     }
 
-    const handleNoteFormSubmit = e => {
+    const handleSaveNote = e => {
         e.preventDefault();
-
         if ( !noteData.noteTitle || !noteData.noteData || !noteData.noteTag ) {
+            alert( "No empty filed! Please enter the data correctly!" );
             setSuccess( false );
-            alert( "Please enter the data correctly!" );
             return;
         }
-
         else {
-            saveNoteToMongoDb();
-            setSuccess( true );
-            window.location.reload();
+            fetch( 'https://enigmatic-coast-44636.herokuapp.com/notes', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify( noteData )
+            } )
+                .then( res => res.json() )
+                .then( data => {
+                    if ( data.insertedId ) {
+                        alert( 'New note is added successfully. Thank you.' );
+                        window.location.reload();
+                    }
+                } )
         }
     }
 
@@ -97,7 +82,7 @@ const InputForm = () => {
             <Grid container spacing={ 2 }>
                 <Grid sx={ { border: 1, p: 4 } } item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
                     <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left", mb: 4 } }>Please Add a Tag Below</Typography>
-                    <form onSubmit={ handleTagFormSubmit }>
+                    <form onSubmit={ handleSaveTag }>
                         <TextField
                             sx={ { width: 1, mb: 4 } }
                             id="tagName"
@@ -116,7 +101,7 @@ const InputForm = () => {
                 </Grid>
                 <Grid sx={ { border: 1, p: 4 } } item xs={ 12 } sm={ 12 } md={ 6 } lg={ 6 }>
                     <Typography variant="h6" sx={ { fontWeight: 'bold', color: "#3B4DA0", textAlign: "left", mb: 4 } }>Please Add a Note Below</Typography>
-                    <form onSubmit={ handleNoteFormSubmit }>
+                    <form onSubmit={ handleSaveNote }>
                         <TextField
                             sx={ { width: 1, mb: 4 } }
                             id="noteTitle"
