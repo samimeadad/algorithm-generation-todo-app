@@ -31,7 +31,7 @@ const UpdateNote = () => {
 
     const handleNoteUpdateFormSubmit = e => {
         e.preventDefault();
-        const url = `http://localhost:5001/notes/${ noteId }`;
+        const url = `https://enigmatic-coast-44636.herokuapp.com/notes/${ noteId }`;
         fetch( url, {
             method: 'PUT',
             headers: {
@@ -43,6 +43,7 @@ const UpdateNote = () => {
             .then( data => {
                 if ( data.modifiedCount > 0 ) {
                     alert( 'Note Update Successful' );
+                    setSuccess( true );
                     window.location.reload();
                 }
             } )
@@ -56,7 +57,8 @@ const UpdateNote = () => {
                     sx={ { width: 1, mb: 4 } }
                     id="noteTitle"
                     name="noteTitle"
-                    value={ notesToBeUpdated?.noteTitle }
+                    label={ notesToBeUpdated?.noteTitle }
+                    defaultValue={ notesToBeUpdated?.noteTitle }
                     onBlur={ handleNoteInputChange }
                     variant="standard"
                 />
@@ -64,7 +66,8 @@ const UpdateNote = () => {
                     sx={ { width: 1, mb: 4 } }
                     id="noteData"
                     name="noteData"
-                    value={ notesToBeUpdated?.noteData }
+                    label={ notesToBeUpdated?.noteData }
+                    defaultValue={ notesToBeUpdated?.noteData }
                     onBlur={ handleNoteInputChange }
                     variant="standard"
                 />

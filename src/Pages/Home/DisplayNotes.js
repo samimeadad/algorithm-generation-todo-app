@@ -18,8 +18,8 @@ const DisplayNotes = () => {
                 {
                     notes?.map( note => <DisplaySingleNote
                         key={ note._id }
-                        note={ note }>
-                    </DisplaySingleNote> )
+                        note={ note }
+                    ></DisplaySingleNote> )
                 }
             </Grid>
         </Container>

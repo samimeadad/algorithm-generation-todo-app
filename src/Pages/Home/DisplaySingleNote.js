@@ -15,14 +15,14 @@ const DisplaySingleNote = ( { note } ) => {
         //get the alert message for note delete. if proceed is true then delete the note from the local storage
         const proceed = window.confirm( "Are you sure to delete the note?" );
         if ( proceed ) {
-            const url = `http://localhost:5001/notes/${ id }`;
+            const url = `https://enigmatic-coast-44636.herokuapp.com/notes/${ id }`;
             fetch( url, {
                 method: 'DELETE'
             } )
                 .then( res => res.json() )
                 .then( data => {
                     if ( data.deletedCount > 0 ) {
-                        const remainingNotes = notes.filter( note => parseInt( note._id ) !== parseInt( id ) );
+                        const remainingNotes = notes.filter( note => note._id !== id );
                         setNotes( remainingNotes );
                         alert( 'Your note has been deleted successfully' );
                         window.location.reload( false );

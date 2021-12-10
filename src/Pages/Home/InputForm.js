@@ -28,7 +28,7 @@ const InputForm = () => {
     }
 
     const saveTagToMongoDb = () => {
-        fetch( 'http://localhost:5001/tags', {
+        fetch( 'https://enigmatic-coast-44636.herokuapp.com/tags', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -44,7 +44,7 @@ const InputForm = () => {
     }
 
     const saveNoteToMongoDb = () => {
-        fetch( 'http://localhost:5001/notes', {
+        fetch( 'https://enigmatic-coast-44636.herokuapp.com/notes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
