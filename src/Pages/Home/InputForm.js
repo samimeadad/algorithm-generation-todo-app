@@ -141,7 +141,7 @@ const InputForm = () => {
                                 onChange={ handleNoteInputChange }
                             >
                                 {
-                                    tags?.map( tag => <MenuItem key={ tag?._id } defaultValue={ tag?.tagName } value={ tag?.tagName }>{ tag.tagName }</MenuItem> )
+                                    tags?.map( tag => <MenuItem key={ tag?._id } defaultValue={ tag?.tagName } value={ tag?.tagName }>{ tag?.tagName }</MenuItem> )
                                 }
                             </Select>
                         </FormControl>

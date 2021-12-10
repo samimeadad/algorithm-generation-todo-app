@@ -1,16 +1,22 @@
 import { Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useParams } from "react-router-dom";
+import useNotes from '../../Hooks/useNotes';
+import useTags from '../../Hooks/useTags';
 
 const UpdateNote = () => {
     const { noteId } = useParams();
+    console.log( noteId );
+
+    const [ notes ] = useNotes();
+    const [ tags ] = useTags();
+
     const [ noteData, setNoteData ] = useState( {} );
     const [ success, setSuccess ] = useState( false );
 
-    const notesFromLocalStorage = JSON.parse( localStorage.getItem( 'notes' ) );
-    const tagsFromLocalStorage = JSON.parse( localStorage.getItem( 'tags' ) );
+    const notesToBeUpdated = notes?.find( note => note?._id === noteId );
 
-    const notesToBeUpdated = notesFromLocalStorage.filter( note => parseInt( note.noteId ) === parseInt( noteId ) );
+    console.log( notesToBeUpdated );
 
     const handleNoteInputChange = e => {
         e.preventDefault();
@@ -21,39 +27,44 @@ const UpdateNote = () => {
         setNoteData( newNoteData );
     }
 
+    console.log( noteData );
+
     const handleNoteUpdateFormSubmit = e => {
         e.preventDefault();
-        const newNotes = notesFromLocalStorage.map( note => {
-            if ( note.noteId === noteId ) {
-                note.noteTitle = noteData.noteTitle;
-                note.noteData = noteData.noteData;
-                note.noteTag = noteData.noteTag;
-            }
-            return note;
-        } );
-        localStorage.setItem( 'notes', JSON.stringify( newNotes ) );
-        setSuccess( true );
+        const url = `http://localhost:5001/notes/${ noteId }`;
+        fetch( url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify( noteData )
+        } )
+            .then( res => res.json() )
+            .then( data => {
+                if ( data.modifiedCount > 0 ) {
+                    alert( 'Note Update Successful' );
+                    window.location.reload();
+                }
+            } )
     }
 
     return (
         <Container sx={ { my: 6 } }>
-            <Typography variant="h4">Update Note: { notesToBeUpdated[ 0 ]?.noteTitle }</Typography>
+            <Typography variant="h4" sx={ { mb: 8 } }>Update Note: { notesToBeUpdated?.noteTitle }</Typography>
             <form onSubmit={ handleNoteUpdateFormSubmit }>
                 <TextField
                     sx={ { width: 1, mb: 4 } }
                     id="noteTitle"
-                    label="Please modify the note title if you want to update"
                     name="noteTitle"
-                    defaultValue={ notesToBeUpdated[ 0 ]?.noteTitle }
+                    value={ notesToBeUpdated?.noteTitle }
                     onBlur={ handleNoteInputChange }
                     variant="standard"
                 />
                 <TextField
                     sx={ { width: 1, mb: 4 } }
                     id="noteData"
-                    label="Please modify the note data if you want to update"
                     name="noteData"
-                    defaultValue={ notesToBeUpdated[ 0 ]?.noteData }
+                    value={ notesToBeUpdated?.noteData }
                     onBlur={ handleNoteInputChange }
                     variant="standard"
                 />
@@ -63,12 +74,11 @@ const UpdateNote = () => {
                         labelId="noteTagLabel"
                         id="noteTagId"
                         name="noteTag"
-                        value={ noteData.noteTag }
-                        defaultValue={ notesToBeUpdated[ 0 ]?.noteTag }
+                        value={ notesToBeUpdated?.noteTag }
                         onChange={ handleNoteInputChange }
                     >
                         {
-                            tagsFromLocalStorage?.map( tag => <MenuItem key={ tag?.tagId } value={ tag?.tagName }>{ tag.tagName }</MenuItem> )
+                            tags?.map( tag => <MenuItem key={ tag?._id } defaultValue={ tag?.tagName } value={ tag?.tagName }>{ tag?.tagName }</MenuItem> )
                         }
                     </Select>
                 </FormControl>
