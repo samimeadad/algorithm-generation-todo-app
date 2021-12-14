@@ -68,6 +68,7 @@ const UpdateNote = () => {
                     defaultValue={ notesToBeUpdated?.noteTitle }
                     onBlur={ handleNoteInputChange }
                     variant="standard"
+                    required
                 />
                 <TextField
                     sx={ { width: 1, mb: 4 } }
@@ -77,6 +78,7 @@ const UpdateNote = () => {
                     defaultValue={ notesToBeUpdated?.noteData }
                     onBlur={ handleNoteInputChange }
                     variant="standard"
+                    required
                 />
                 <FormControl variant="standard" fullWidth>
                     <InputLabel id="noteTagLabel">Please change the tag if required</InputLabel>
